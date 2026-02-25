@@ -1,0 +1,234 @@
+<body>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spring Boot Architecture Guide</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Spring Boot Guide</div>
+  <button id="theme-toggle" class="toggle-btn">🌙</button>
+</header>
+
+<section class="hero reveal">
+  <h1>Entendendo Arquitetura em Camadas no Spring Boot</h1>
+  <p>
+    Um guia visual e didático para aprender como organizar seu projeto,
+    separar responsabilidades e entender o fluxo de uma requisição.
+  </p>
+</section>
+
+<section class="reveal">
+  <h2>Modelo deArquitetura em Camadas</h2>
+  <div class="cards">
+    <div class="card">Controller </div>
+    <div class="card">Service</div>
+    <div class="card">Repository </div>
+    <div class="card">DTO & Entity </div>
+  </div>
+  <p class="section-text">
+    A arquitetura em camadas separa responsabilidades para manter o código
+    organizado, testável e fácil de manter.
+  </p>
+</section>
+
+<section class="reveal">
+  <h2>📂 Estrutura do Projeto</h2>
+
+  <pre class="code-block">
+src/main/java/com.seuprojeto
+├── controller
+├── service
+├── repository
+├── entity
+└── dto
+  </pre>
+
+  <p class="section-text">
+    Cada pacote tem uma responsabilidade clara. Essa organização facilita
+    manutenção, testes e escalabilidade.
+  </p>
+</section>
+
+<section class="reveal">
+  <h2>🔎 Responsabilidade de Cada Camada</h2>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Controller</h3>
+      <p>Recebe requisições HTTP e delega ao Service.</p>
+    </div>
+
+    <div class="card">
+      <h3>Service</h3>
+      <p>Aplica regras de negócio e coordena operações.</p>
+    </div>
+
+    <div class="card">
+      <h3>Repository</h3>
+      <p>Realiza operações no banco de dados.</p>
+    </div>
+
+    <div class="card">
+      <h3>DTO & Entity</h3>
+      <p>DTO transporta dados. Entity representa a tabela.</p>
+    </div>
+  </div>
+</section>
+
+<section id="fluxo" class="reveal">
+  <h2> Como uma requisição percorre o sistema?</h2>
+
+  <p class="section-text">
+    Exemplo: um usuário envia um POST /users para criar um novo cadastro.
+  </p>
+
+  <div class="flow-box controller"
+     data-title="Controller"
+     data-description="Recebe requisições HTTP e valida dados básicos."
+     data-details="• Não contém regra de negócio
+• Chama o Service
+• Retorna ResponseEntity">
+  Controller
+</div>
+
+<div class="flow-box service"
+     data-title="Service"
+     data-description="Aplica regras de negócio e coordena operações."
+     data-details="• Converte DTO para Entity
+• Pode chamar múltiplos repositories
+• Centraliza lógica da aplicação">
+  Service
+</div>
+
+<div class="flow-box repository"
+     data-title="Repository"
+     data-description="Responsável pela comunicação com o banco."
+     data-details="• Usa JPA
+• Não contém regra de negócio
+• Executa operações CRUD">
+  Repository
+</div>
+
+<div class="flow-box database"
+     data-title="Database"
+     data-description="Armazena dados de forma persistente."
+     data-details="• Guarda informações
+• Pode ser MySQL, PostgreSQL, etc
+• Não conhece regras da aplicação">
+  Database
+</div>
+
+  <div class="flow-explanation" id="flow-explanation">
+  <div class="flow-card">
+
+    <div class="flow-content">
+
+      <!-- COLUNA ESQUERDA -->
+      <div class="flow-text">
+        <h3 id="flow-title">Selecione uma camada</h3>
+        <p id="flow-description">
+          Clique em uma camada para entender sua responsabilidade.
+        </p>
+        <div id="flow-details"></div>
+      </div>
+
+      <!-- COLUNA DIREITA -->
+      <div class="flow-code">
+        <div class="code-header">
+          <span>Exemplo de Código</span>
+        </div>
+        <pre id="code-example" class="code-example">
+          Selecione uma camada para ver o código.
+        </pre>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+</section>
+
+<section class="reveal">
+  <h2>💻 Exemplo Simplificado</h2>
+
+  <pre class="code-block">
+@PostMapping
+public ResponseEntity<User> create(@RequestBody UserDTO dto) {
+    return ResponseEntity.ok(userService.save(dto));
+}
+  </pre>
+
+  <p class="section-text">
+    O Controller recebe o DTO e delega ao Service,
+    que aplica regras e salva usando o Repository.
+  </p>
+</section>
+
+<section class="architecture-structure">
+
+  <h2 class="section-title">
+    Componentes Estruturais da Aplicação
+  </h2>
+
+  <p class="section-subtitle">
+    Elementos que sustentam a aplicação, mas não participam diretamente do fluxo da requisição.
+  </p>
+
+  <div class="structure-grid">
+
+    <div class="structure-card reveal">
+      <h3>Config</h3>
+      <p>Configurações globais do sistema.</p>
+      <ul>
+        <li>Segurança</li>
+        <li>CORS</li>
+        <li>Beans personalizados</li>
+      </ul>
+    </div>
+
+    <div class="structure-card reveal">
+      <h3>Exception</h3>
+      <p>Tratamento centralizado de erros.</p>
+      <ul>
+        <li>@RestControllerAdvice</li>
+        <li>Padronização de respostas</li>
+        <li>Evita try/catch espalhado</li>
+      </ul>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="reveal">
+  <h2>🧠 Resumo</h2>
+
+  <div class="summary-box">
+    ✔ Controller não contém regra de negócio<br>
+    ✔ Service concentra lógica<br>
+    ✔ Repository acessa o banco<br>
+    ✔ DTO protege dados sensíveis<br>
+    ✔ Separação facilita manutenção
+  </div>
+</section>
+
+
+
+<footer>
+  Feito por Márcia Escolástico • Guia educacional
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
+
+</body>
+</html>
