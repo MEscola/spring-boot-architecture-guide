@@ -6,7 +6,7 @@ Este projeto foi criado com foco educacional, demonstrando de forma clara e orga
 
 ---
 
-## 🎯 Objetivo
+## Objetivo
 
 Explicar de maneira didática:
 
@@ -18,7 +18,7 @@ Explicar de maneira didática:
 
 ---
 
-## 🧠 Arquitetura em Camadas
+## Arquitetura em Camadas
 
 A aplicação segue o modelo tradicional:
 
@@ -45,7 +45,7 @@ O projeto inclui:
 
 ---
 
-## 📂 Estrutura do Projeto
+## Estrutura do Projeto
 
 spring-boot-architecture-guide
 │
@@ -58,7 +58,7 @@ spring-boot-architecture-guide
 
 ---
 
-## 🏗 Componentes Estruturais
+## Componentes Estruturais
 
 Além das camadas principais, o projeto explica:
 
