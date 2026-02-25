@@ -4,6 +4,8 @@ Um guia visual e interativo para entender a arquitetura em camadas no Spring Boo
 
 Este projeto foi criado com foco educacional, demonstrando de forma clara e organizada como estruturar uma aplicação backend utilizando separação de responsabilidades.
 
+[Acesse a versão hospedada via GitHub Pages](https://mescola.github.io/spring-boot-architecture-guide/)
+
 ---
 
 ## Objetivo
@@ -72,10 +74,6 @@ Além das camadas principais, o projeto explica:
 git clone ... 
 
 ´´´
-
-- Acesse a versão hospedada via GitHub Pages.
-
----
 
 Projeto criado com foco em aprendizado e organização arquitetura
 
